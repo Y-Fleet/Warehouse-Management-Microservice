@@ -1,0 +1,76 @@
+syntax = "proto3";
+package warehouse;
+import "annotations.proto";
+
+option go_package = "./proto";
+
+service WarehouseManagementService {
+  rpc RenderWarehouse (RenderWarehouseRequest) returns (RenderWarehouseResponse) {
+    option (google.api.http) = {
+      post: "/WarehouseDash"
+      body: "*"
+    };
+  }
+    rpc InfoWarehouse(InfoWarehouseRequest) returns (InfoWarehouseResponse) {
+    option (google.api.http) = {
+      post: "/InfoWarehouse"
+      body: "*"
+    };
+  }
+    rpc AddStock(AddStockRequest) returns (AddStockResponse) {
+    option (google.api.http) = {
+      post: "/InfoWarehouse/{warehouse_id}/addStock"
+      body: "*"
+    };
+  }
+
+}
+
+
+message InfoWarehouseRequest { 
+  string id = 1;
+}
+
+message InfoWarehouseResponse {
+  Warehouse warehouse = 1;
+}
+
+message RenderWarehouseRequest { 
+}
+
+message RenderWarehouseResponse {
+   repeated Warehouse warehouse = 1;
+}
+
+
+message Warehouse {
+  string id = 1;
+  string name = 2;
+  string address = 3;
+  double latitude = 4;
+  double longitude = 5;
+  repeated InventoryItem inventory = 6;
+}
+
+message InventoryItem {
+  string itemId = 1;
+  int32 quantity = 2;
+  ItemWaherouse infoItem = 3;
+}
+
+message ItemWaherouse {
+  string ID = 1;
+  string name = 2;
+  string desc = 3;
+  int32 kg = 4;
+}
+
+message AddStockRequest {
+  string IDWharehouse = 1;
+  string IDItems = 2;
+  int32 stock = 3;
+}
+
+message AddStockResponse {
+  InventoryItem item = 1;
+}
