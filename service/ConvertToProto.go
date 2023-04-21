@@ -3,8 +3,7 @@ package service
 import (
 	"warehouse/models"
 
-	
-	pb "github.com/Yfleet/shared_proto/api"
+	pb "github.com/Y-Fleet/Grpc-Api/api"
 )
 
 func ConvertToProtoWarehouses(modelWarehouses []*models.Warehouse, itemMap map[string]*models.Item) []*pb.Warehouse {
